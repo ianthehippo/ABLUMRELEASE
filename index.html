@@ -1,1 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Album Release</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #050505;
+      color: white;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .album-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      background:
+        radial-gradient(circle at top, #3b0000, transparent 35%),
+        linear-gradient(180deg, #050505, #111);
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .album-page.revealed {
+      opacity: 1;
+    }
+
+    .album-cover {
+      width: 300px;
+      max-width: 85%;
+      border-radius: 18px;
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.45);
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #ccc;
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+    }
+
+    .release {
+      font-size: 1rem;
+      color: #ff4d4d;
+      letter-spacing: 2px;
+    }
+
+    .listen-btn {
+      margin-top: 30px;
+      padding: 14px 30px;
+      border: 2px solid #ff2b2b;
+      border-radius: 999px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .listen-btn:hover {
+      background: #ff2b2b;
+      box-shadow: 0 0 25px #ff2b2b;
+    }
+
+    #countdownOverlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #330000, #000 65%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    #countdownOverlay h2 {
+      font-size: 3.5rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      margin-bottom: 15px;
+    }
+
+    #countdownOverlay p {
+      color: #aaa;
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+    }
+
+    #timer {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 20px;
+      min-width: 110px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff3b3b;
+    }
+
+    .time-box small {
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .locked {
+      margin-top: 30px;
+      color: #ff4d4d;
+      letter-spacing: 3px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.7rem;
+      }
+
+      #countdownOverlay h2 {
+        font-size: 2.2rem;
+      }
+
+      .time-box {
+        min-width: 90px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="countdownOverlay">
+    <h2>06 • 12 • 26</h2>
+    <p>Something powerful is coming.</p>
+
+    <div id="timer">
+      <div class="time-box">
+        <span id="days">00</span>
+        <small>Days</small>
+      </div>
+      <div class="time-box">
+        <span id="hours">00</span>
+        <small>Hours</small>
+      </div>
+      <div class="time-box">
+        <span id="minutes">00</span>
+        <small>Minutes</small>
+      </div>
+      <div class="time-box">
+        <span id="seconds">00</span>
+        <small>Seconds</small>
+      </div>
+    </div>
+
+    <div class="locked">CLASSIFIED UNTIL RELEASE</div>
+  </div>
+
+  <main class="album-page">
+    <img
+      class="album-cover"
+      src="https://via.placeholder.com/800x800.png?text=ALBUM+COVER"
+      alt="POWER FOREVER Album Cover"
+    />
+
+    <h1>POWER FOREVER</h1>
+    <p class="subtitle">The new album is finally here.</p>
+    <p class="release">Released June 12, 2026</p>
+
+    <a href="#" class="listen-btn">Listen Now</a>
+  </main>
+
+  <script>
+    const releaseDate = new Date("June 12, 2026 00:00:00").getTime();
+
+    const overlay = document.getElementById("countdownOverlay");
+    const albumPage = document.querySelector(".album-page");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance <= 0) {
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+        albumPage.classList.add("revealed");
+        return;
+      }
+
+      document.body.style.overflow = "hidden";
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
