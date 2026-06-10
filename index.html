@@ -158,6 +158,59 @@
         padding: 15px;
       }
     }
+    .album-title {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+
+.release-date {
+  color: #ff4444;
+  letter-spacing: 3px;
+  margin-bottom: 35px;
+  text-transform: uppercase;
+}
+
+.tracklist {
+  margin-top: 70px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.tracklist h2 {
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  color: #ff4444;
+}
+
+.track {
+  padding: 12px;
+  margin: 8px 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.track:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.album-cover {
+  width: 400px;
+  max-width: 90%;
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .album-title {
+    font-size: 3rem;
+  }
+}
   </style>
 </head>
 
@@ -190,18 +243,42 @@
   </div>
 
   <main class="album-page">
+
+    <!-- REPLACE WITH YOUR REAL ALBUM COVER URL LATER -->
     <img
       class="album-cover"
-      src="https://via.placeholder.com/800x800.png?text=ALBUM+COVER"
+      src="https://via.placeholder.com/1000x1000.png?text=POWER+FOREVER"
       alt="POWER FOREVER Album Cover"
     />
 
-    <h1>POWER FOREVER</h1>
-    <p class="subtitle">The new album is finally here.</p>
-    <p class="release">Released June 12, 2026</p>
+    <h1 class="album-title">POWER FOREVER</h1>
 
-    <a href="#" class="listen-btn">Listen Now</a>
-  </main>
+    <p class="subtitle">
+      The new album is finally Coming.
+    </p>
+
+    <p class="release-date">
+      Release Date ?
+    </p>
+
+    <a href="#" class="listen-btn">
+      LISTEN SOON
+    </a>
+
+    <div class="tracklist">
+      <h2>TRACKLIST</h2>
+
+      <div class="track">01 • The Story Starts Here</div>
+      <div class="track">02 • ?</div>
+      <div class="track">03 • ?</div>
+      <div class="track">04 • ?</div>
+      <div class="track">05 • ?</div>
+      <div class="track">06 • ?</div>
+      <div class="track">07 • ?</div>
+      <div class="track">08 • ?</div>
+    </div>
+
+</main>
 
   <script>
     const releaseDate = new Date("June 12, 2026 00:00:00").getTime();
