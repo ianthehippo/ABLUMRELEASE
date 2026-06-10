@@ -255,10 +255,11 @@
 
     <!-- REPLACE WITH YOUR REAL ALBUM COVER URL LATER -->
     <img
-      class="album-cover"
-      src="https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/power.png"
-      alt="POWER FOREVER Album Cover"
-    />
+  class="album-cover"
+  id="albumCover"
+  src="https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/MMJM.png"
+  alt="Coming Soon"
+/>
 
     <h1 class="album-title">POWER FOREVER</h1>
 
@@ -291,7 +292,10 @@
 
   <script>
     const releaseDate = new Date("June 12, 2026 00:00:00").getTime();
+const REAL_COVER =
+"https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/power.png";
 
+const albumCover = document.getElementById("albumCover");
     const overlay = document.getElementById("countdownOverlay");
     const albumPage = document.querySelector(".album-page");
 
@@ -300,11 +304,16 @@
       const distance = releaseDate - now;
 
       if (distance <= 0) {
-        overlay.style.display = "none";
-        document.body.style.overflow = "auto";
-        albumPage.classList.add("revealed");
-        return;
-      }
+
+  albumCover.src = REAL_COVER;
+  albumCover.alt = "POWER FOREVER Album Cover";
+
+  overlay.style.display = "none";
+  document.body.style.overflow = "auto";
+  albumPage.classList.add("revealed");
+
+  return;
+}
 
       document.body.style.overflow = "hidden";
 
