@@ -1,3 +1,6 @@
+Yes — here is the **phone-friendly full HTML version** with the classified hacking countdown cleaned up for mobile screens:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,22 +26,28 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: "Courier New", monospace;
       background: #020605;
       color: #d9ffe8;
-      min-height: 100vh;
       overflow: hidden;
     }
 
     .album-page {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 30px;
+      padding: 24px 16px;
       background:
         radial-gradient(circle at top, #06351f, transparent 35%),
         linear-gradient(180deg, #020605, #050f0a);
@@ -51,45 +60,47 @@
     }
 
     .album-cover {
-      width: 400px;
-      max-width: 90%;
+      width: min(380px, 88vw);
       border-radius: 16px;
-      box-shadow: 0 0 60px rgba(0,255,140,0.35);
-      margin-bottom: 30px;
+      box-shadow: 0 0 50px rgba(0,255,140,0.35);
+      margin-bottom: 24px;
     }
 
     .album-title {
-      font-size: 5rem;
+      font-size: clamp(2.4rem, 11vw, 5rem);
       font-weight: 900;
-      letter-spacing: 6px;
+      letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 15px;
       color: #00ff8c;
       text-shadow: 0 0 30px rgba(0,255,140,0.7);
+      word-break: break-word;
     }
 
     .subtitle {
       color: #b8ffd7;
-      font-size: 1.1rem;
-      margin-bottom: 25px;
+      font-size: 1rem;
+      margin-bottom: 20px;
     }
 
     .release-date {
       color: #ff3b3b;
-      letter-spacing: 3px;
-      margin-bottom: 35px;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
       text-transform: uppercase;
+      font-size: 0.9rem;
     }
 
     .listen-btn {
-      margin-top: 30px;
-      padding: 14px 30px;
+      margin-top: 20px;
+      padding: 13px 26px;
       border: 2px solid #00ff8c;
       border-radius: 4px;
       color: #00ff8c;
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
+      font-size: 0.9rem;
     }
 
     .listen-btn:hover {
@@ -99,15 +110,16 @@
     }
 
     .tracklist {
-      margin-top: 70px;
+      margin-top: 50px;
       max-width: 500px;
       width: 100%;
     }
 
     .tracklist h2 {
-      margin-bottom: 20px;
-      letter-spacing: 4px;
+      margin-bottom: 16px;
+      letter-spacing: 3px;
       color: #00ff8c;
+      font-size: 1.2rem;
     }
 
     .track {
@@ -116,13 +128,15 @@
       background: rgba(0,255,140,0.06);
       border: 1px solid rgba(0,255,140,0.25);
       border-radius: 4px;
+      font-size: 0.9rem;
     }
 
     #countdownOverlay {
       position: fixed;
       inset: 0;
       z-index: 9999;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       background:
         radial-gradient(circle at 20% 20%, rgba(0,255,140,0.13), transparent 25%),
         radial-gradient(circle at 80% 80%, rgba(255,0,0,0.16), transparent 30%),
@@ -131,18 +145,19 @@
 
     #countdownOverlay::before {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       background:
         linear-gradient(rgba(0,255,140,0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,255,140,0.04) 1px, transparent 1px);
       background-size: 42px 42px;
       animation: gridMove 10s linear infinite;
+      pointer-events: none;
     }
 
     #countdownOverlay::after {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
       background: repeating-linear-gradient(
         to bottom,
@@ -160,14 +175,15 @@
     }
 
     .matrix {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      opacity: 0.18;
+      opacity: 0.15;
       color: #00ff8c;
-      font-size: 13px;
-      line-height: 1.3;
+      font-size: 12px;
+      line-height: 1.4;
       white-space: pre;
       animation: matrixScroll 14s linear infinite;
+      pointer-events: none;
     }
 
     @keyframes matrixScroll {
@@ -179,25 +195,28 @@
       position: relative;
       z-index: 5;
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 260px 1fr 260px;
-      gap: 20px;
-      padding: 25px;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 14px;
+      padding-bottom: 115px;
     }
 
     .panel {
-      background: rgba(0, 20, 12, 0.72);
+      background: rgba(0, 20, 12, 0.76);
       border: 1px solid rgba(0,255,140,0.28);
       box-shadow: inset 0 0 25px rgba(0,255,140,0.04), 0 0 30px rgba(0,0,0,0.5);
-      padding: 16px;
+      padding: 14px;
       backdrop-filter: blur(8px);
+      width: 100%;
     }
 
     .panel h3 {
       color: #00ff8c;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       letter-spacing: 2px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border-bottom: 1px solid rgba(0,255,140,0.25);
       padding-bottom: 8px;
     }
@@ -205,7 +224,7 @@
     .small-line {
       font-size: 0.72rem;
       color: #a9ffd0;
-      margin: 8px 0;
+      margin: 7px 0;
       opacity: 0.9;
     }
 
@@ -213,8 +232,8 @@
       background: #d9ffe8;
       color: transparent;
       display: inline-block;
-      width: 95px;
-      height: 10px;
+      width: 85px;
+      height: 9px;
       vertical-align: middle;
     }
 
@@ -229,32 +248,34 @@
       align-items: center;
       text-align: center;
       position: relative;
+      padding: 20px 0;
     }
 
     .classified-stamp {
       color: #ff3333;
       border: 2px solid #ff3333;
-      padding: 8px 18px;
-      letter-spacing: 5px;
+      padding: 7px 14px;
+      letter-spacing: 4px;
       transform: rotate(-5deg);
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       font-weight: bold;
       box-shadow: 0 0 25px rgba(255,0,0,0.25);
+      font-size: 0.75rem;
     }
 
     .top-label {
-      font-size: 0.75rem;
-      letter-spacing: 6px;
+      font-size: 0.68rem;
+      letter-spacing: 4px;
       color: #00ff8c;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       text-transform: uppercase;
     }
 
     #countdownOverlay h2 {
-      font-size: clamp(3rem, 10vw, 8rem);
-      line-height: 0.9;
+      font-size: clamp(2.7rem, 15vw, 8rem);
+      line-height: 0.95;
       text-transform: uppercase;
-      letter-spacing: 8px;
+      letter-spacing: 4px;
       color: #d9ffe8;
       text-shadow:
         0 0 20px rgba(0,255,140,0.8),
@@ -271,24 +292,25 @@
 
     #countdownOverlay p {
       color: #a9ffd0;
-      margin: 20px 0 34px;
-      font-size: 0.95rem;
-      letter-spacing: 2px;
+      margin: 18px 0 26px;
+      font-size: 0.78rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
+      max-width: 92vw;
     }
 
     #timer {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      max-width: 760px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
       width: 100%;
+      max-width: 420px;
     }
 
     .time-box {
       background: rgba(0, 255, 140, 0.06);
       border: 1px solid rgba(0,255,140,0.35);
-      padding: 22px 14px;
+      padding: 16px 8px;
       border-radius: 3px;
       box-shadow:
         0 0 30px rgba(0,255,140,0.12),
@@ -297,7 +319,7 @@
 
     .time-box span {
       display: block;
-      font-size: clamp(2.3rem, 6vw, 4.5rem);
+      font-size: clamp(2rem, 13vw, 4rem);
       font-weight: 900;
       color: #00ff8c;
       text-shadow: 0 0 25px rgba(0,255,140,0.7);
@@ -306,30 +328,30 @@
     .time-box small {
       color: #d9ffe8;
       text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.7rem;
+      letter-spacing: 2px;
+      font-size: 0.65rem;
     }
 
     .locked {
-      margin-top: 28px;
+      margin-top: 22px;
       color: #ff3333;
-      letter-spacing: 5px;
+      letter-spacing: 3px;
       font-weight: bold;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
     }
 
     .terminal {
       width: 100%;
-      max-width: 720px;
-      margin-top: 28px;
+      max-width: 520px;
+      margin-top: 24px;
       text-align: left;
       background: rgba(0,0,0,0.48);
       border: 1px solid rgba(0,255,140,0.25);
-      padding: 14px;
-      font-size: 0.72rem;
+      padding: 12px;
+      font-size: 0.68rem;
       color: #8cffbd;
-      height: 118px;
+      height: 112px;
       overflow: hidden;
     }
 
@@ -343,65 +365,12 @@
       50% { opacity: 0.45; }
     }
 
-    .bottom-actions {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 12;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 90%;
-    }
-
-    .action-btn {
-      background: rgba(0,255,140,0.08);
-      color: #d9ffe8;
-      border: 1px solid rgba(0,255,140,0.35);
-      padding: 12px 16px;
-      font-family: inherit;
-      cursor: pointer;
-      letter-spacing: 2px;
-      transition: 0.25s;
-    }
-
-    .action-btn:hover {
-      background: rgba(0,255,140,0.2);
-      box-shadow: 0 0 20px rgba(0,255,140,0.3);
-      transform: translateY(-4px);
-    }
-
-    .message-box {
-      position: absolute;
-      bottom: 95px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 15;
-      padding: 14px 20px;
-      max-width: 430px;
-      background: rgba(0,0,0,0.82);
-      border: 1px solid rgba(0,255,140,0.5);
-      color: #d9ffe8;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.3s;
-    }
-
-    .message-box.show {
-      opacity: 1;
-    }
-
     .scan-circle {
-      width: 170px;
-      height: 170px;
+      width: 120px;
+      height: 120px;
       border: 1px solid rgba(0,255,140,0.35);
       border-radius: 50%;
-      margin: 10px auto 18px;
+      margin: 8px auto 14px;
       position: relative;
       box-shadow: 0 0 30px rgba(0,255,140,0.12);
     }
@@ -409,7 +378,7 @@
     .scan-circle::before {
       content: "";
       position: absolute;
-      inset: 12px;
+      inset: 10px;
       border: 1px dashed rgba(0,255,140,0.35);
       border-radius: 50%;
     }
@@ -432,27 +401,134 @@
       to { transform: rotate(360deg); }
     }
 
-    @media (max-width: 900px) {
+    .bottom-actions {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      width: calc(100% - 24px);
+      max-width: 500px;
+      background: rgba(1, 4, 3, 0.8);
+      padding: 10px;
+      border: 1px solid rgba(0,255,140,0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .action-btn {
+      background: rgba(0,255,140,0.08);
+      color: #d9ffe8;
+      border: 1px solid rgba(0,255,140,0.35);
+      padding: 11px 8px;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: 0.25s;
+      font-size: 0.68rem;
+      min-height: 42px;
+    }
+
+    .action-btn:active {
+      background: rgba(0,255,140,0.22);
+      transform: scale(0.97);
+    }
+
+    .message-box {
+      position: fixed;
+      bottom: 105px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      padding: 12px 16px;
+      width: calc(100% - 30px);
+      max-width: 420px;
+      background: rgba(0,0,0,0.88);
+      border: 1px solid rgba(0,255,140,0.5);
+      color: #d9ffe8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .message-box.show {
+      opacity: 1;
+    }
+
+    @media (min-width: 901px) {
       .hud {
-        grid-template-columns: 1fr;
-        padding: 16px;
+        display: grid;
+        grid-template-columns: 260px 1fr 260px;
+        gap: 20px;
+        padding: 25px;
+        padding-bottom: 100px;
       }
 
-      .left-panel,
-      .right-panel {
-        display: none;
+      .center-console {
+        padding: 0;
       }
 
       #timer {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 760px;
       }
 
       .bottom-actions {
-        bottom: 15px;
+        display: flex;
+        justify-content: center;
+        max-width: 900px;
       }
 
-      .album-title {
-        font-size: 3rem;
+      .action-btn:hover {
+        background: rgba(0,255,140,0.2);
+        box-shadow: 0 0 20px rgba(0,255,140,0.3);
+        transform: translateY(-4px);
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hud {
+        padding: 10px;
+        padding-bottom: 115px;
+      }
+
+      .left-panel {
+        order: 2;
+      }
+
+      .center-console {
+        order: 1;
+      }
+
+      .right-panel {
+        order: 3;
+      }
+
+      .panel {
+        padding: 12px;
+      }
+
+      .classified-stamp {
+        letter-spacing: 3px;
+        font-size: 0.68rem;
+      }
+
+      .top-label {
+        letter-spacing: 3px;
+      }
+
+      #countdownOverlay h2 {
+        letter-spacing: 3px;
+      }
+
+      .terminal {
+        height: 96px;
       }
     }
   </style>
@@ -462,16 +538,16 @@
 
   <div id="countdownOverlay">
     <div class="matrix">
-010101  ACCESS NODE  7719  SECURE FILE  ██ ██ ██
-110010  TRACE ACTIVE  06.12.26  CLASSIFIED
-001101  POWER SIGNAL  LOCKED  LOCKED  LOCKED
-101010  FILE STATUS  REDACTED  REDACTED
-011001  AUDIO PACKAGE  ENCRYPTED  WAITING
-010101  ACCESS NODE  7719  SECURE FILE  ██ ██ ██
-110010  TRACE ACTIVE  06.12.26  CLASSIFIED
-001101  POWER SIGNAL  LOCKED  LOCKED  LOCKED
-101010  FILE STATUS  REDACTED  REDACTED
-011001  AUDIO PACKAGE  ENCRYPTED  WAITING
+010101 ACCESS NODE 7719 SECURE FILE
+110010 TRACE ACTIVE 06.12.26 CLASSIFIED
+001101 POWER SIGNAL LOCKED LOCKED
+101010 FILE STATUS REDACTED
+011001 AUDIO PACKAGE ENCRYPTED
+010101 ACCESS NODE 7719 SECURE FILE
+110010 TRACE ACTIVE 06.12.26 CLASSIFIED
+001101 POWER SIGNAL LOCKED LOCKED
+101010 FILE STATUS REDACTED
+011001 AUDIO PACKAGE ENCRYPTED
     </div>
 
     <div class="hud">
@@ -634,3 +710,4 @@
 
 </body>
 </html>
+```
