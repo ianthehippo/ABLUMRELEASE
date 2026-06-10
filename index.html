@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta property="og:title" content="06 • 12 • 26">
-<meta property="og:description" content="Something powerful is coming.">
-<meta property="og:image" content="">
-<meta property="og:type" content="website">
 
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="06 • 12 • 26">
-<meta name="twitter:description" content="Something powerful is coming.">
-<meta name="twitter:image" content="">
-  <title>Album Release</title>
+  <meta property="og:title" content="06 • 12 • 26">
+  <meta property="og:description" content="Something powerful is coming.">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="06 • 12 • 26">
+  <meta name="twitter:description" content="Something powerful is coming.">
+  <meta name="twitter:image" content="">
+
+  <title>Classified Release</title>
 
   <style>
     * {
@@ -22,9 +24,9 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #050505;
-      color: white;
+      font-family: "Courier New", monospace;
+      background: #020605;
+      color: #d9ffe8;
       min-height: 100vh;
       overflow: hidden;
     }
@@ -38,8 +40,8 @@
       text-align: center;
       padding: 30px;
       background:
-        radial-gradient(circle at top, #3b0000, transparent 35%),
-        linear-gradient(180deg, #050505, #111);
+        radial-gradient(circle at top, #06351f, transparent 35%),
+        linear-gradient(180deg, #020605, #050f0a);
       opacity: 0;
       transition: opacity 2s ease;
     }
@@ -49,235 +51,523 @@
     }
 
     .album-cover {
-      width: 300px;
-      max-width: 85%;
-      border-radius: 18px;
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.45);
-      margin-bottom: 25px;
+      width: 400px;
+      max-width: 90%;
+      border-radius: 16px;
+      box-shadow: 0 0 60px rgba(0,255,140,0.35);
+      margin-bottom: 30px;
     }
 
-    h1 {
-      font-size: 4rem;
-      letter-spacing: 4px;
+    .album-title {
+      font-size: 5rem;
+      font-weight: 900;
+      letter-spacing: 6px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      color: #00ff8c;
+      text-shadow: 0 0 30px rgba(0,255,140,0.7);
     }
 
     .subtitle {
-      color: #ccc;
-      font-size: 1.2rem;
+      color: #b8ffd7;
+      font-size: 1.1rem;
       margin-bottom: 25px;
     }
 
-    .release {
-      font-size: 1rem;
-      color: #ff4d4d;
-      letter-spacing: 2px;
+    .release-date {
+      color: #ff3b3b;
+      letter-spacing: 3px;
+      margin-bottom: 35px;
+      text-transform: uppercase;
     }
 
     .listen-btn {
       margin-top: 30px;
       padding: 14px 30px;
-      border: 2px solid #ff2b2b;
-      border-radius: 999px;
-      color: white;
+      border: 2px solid #00ff8c;
+      border-radius: 4px;
+      color: #00ff8c;
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
     }
 
     .listen-btn:hover {
-      background: #ff2b2b;
-      box-shadow: 0 0 25px #ff2b2b;
+      background: #00ff8c;
+      color: #020605;
+      box-shadow: 0 0 30px #00ff8c;
+    }
+
+    .tracklist {
+      margin-top: 70px;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .tracklist h2 {
+      margin-bottom: 20px;
+      letter-spacing: 4px;
+      color: #00ff8c;
+    }
+
+    .track {
+      padding: 12px;
+      margin: 8px 0;
+      background: rgba(0,255,140,0.06);
+      border: 1px solid rgba(0,255,140,0.25);
+      border-radius: 4px;
     }
 
     #countdownOverlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, #330000, #000 65%);
       z-index: 9999;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,255,140,0.13), transparent 25%),
+        radial-gradient(circle at 80% 80%, rgba(255,0,0,0.16), transparent 30%),
+        linear-gradient(180deg, #03110b, #010403 70%);
+    }
+
+    #countdownOverlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0,255,140,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,140,0.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      animation: gridMove 10s linear infinite;
+    }
+
+    #countdownOverlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.025) 0px,
+        rgba(255,255,255,0.025) 1px,
+        transparent 2px,
+        transparent 5px
+      );
+      pointer-events: none;
+    }
+
+    @keyframes gridMove {
+      from { transform: translateY(0); }
+      to { transform: translateY(42px); }
+    }
+
+    .matrix {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      color: #00ff8c;
+      font-size: 13px;
+      line-height: 1.3;
+      white-space: pre;
+      animation: matrixScroll 14s linear infinite;
+    }
+
+    @keyframes matrixScroll {
+      from { transform: translateY(-40%); }
+      to { transform: translateY(20%); }
+    }
+
+    .hud {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr 260px;
+      gap: 20px;
+      padding: 25px;
+    }
+
+    .panel {
+      background: rgba(0, 20, 12, 0.72);
+      border: 1px solid rgba(0,255,140,0.28);
+      box-shadow: inset 0 0 25px rgba(0,255,140,0.04), 0 0 30px rgba(0,0,0,0.5);
+      padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+
+    .panel h3 {
+      color: #00ff8c;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(0,255,140,0.25);
+      padding-bottom: 8px;
+    }
+
+    .small-line {
+      font-size: 0.72rem;
+      color: #a9ffd0;
+      margin: 8px 0;
+      opacity: 0.9;
+    }
+
+    .redacted {
+      background: #d9ffe8;
+      color: transparent;
+      display: inline-block;
+      width: 95px;
+      height: 10px;
+      vertical-align: middle;
+    }
+
+    .status {
+      color: #ff4242;
+    }
+
+    .center-console {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 25px;
+      position: relative;
+    }
+
+    .classified-stamp {
+      color: #ff3333;
+      border: 2px solid #ff3333;
+      padding: 8px 18px;
+      letter-spacing: 5px;
+      transform: rotate(-5deg);
+      margin-bottom: 22px;
+      font-weight: bold;
+      box-shadow: 0 0 25px rgba(255,0,0,0.25);
+    }
+
+    .top-label {
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: #00ff8c;
+      margin-bottom: 20px;
+      text-transform: uppercase;
     }
 
     #countdownOverlay h2 {
-      font-size: 3.5rem;
+      font-size: clamp(3rem, 10vw, 8rem);
+      line-height: 0.9;
       text-transform: uppercase;
-      letter-spacing: 5px;
-      margin-bottom: 15px;
+      letter-spacing: 8px;
+      color: #d9ffe8;
+      text-shadow:
+        0 0 20px rgba(0,255,140,0.8),
+        0 0 70px rgba(0,255,140,0.35);
+      animation: glitch 2.7s infinite;
+    }
+
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, -2px); }
     }
 
     #countdownOverlay p {
-      color: #aaa;
-      margin-bottom: 30px;
-      font-size: 1.1rem;
+      color: #a9ffd0;
+      margin: 20px 0 34px;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     #timer {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 760px;
+      width: 100%;
     }
 
     .time-box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 20px;
-      min-width: 110px;
-      border-radius: 16px;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+      background: rgba(0, 255, 140, 0.06);
+      border: 1px solid rgba(0,255,140,0.35);
+      padding: 22px 14px;
+      border-radius: 3px;
+      box-shadow:
+        0 0 30px rgba(0,255,140,0.12),
+        inset 0 0 20px rgba(0,255,140,0.04);
     }
 
     .time-box span {
       display: block;
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #ff3b3b;
+      font-size: clamp(2.3rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: #00ff8c;
+      text-shadow: 0 0 25px rgba(0,255,140,0.7);
     }
 
     .time-box small {
-      color: #ccc;
+      color: #d9ffe8;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      font-size: 0.7rem;
     }
 
     .locked {
-      margin-top: 30px;
-      color: #ff4d4d;
-      letter-spacing: 3px;
+      margin-top: 28px;
+      color: #ff3333;
+      letter-spacing: 5px;
       font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.7rem;
+    .terminal {
+      width: 100%;
+      max-width: 720px;
+      margin-top: 28px;
+      text-align: left;
+      background: rgba(0,0,0,0.48);
+      border: 1px solid rgba(0,255,140,0.25);
+      padding: 14px;
+      font-size: 0.72rem;
+      color: #8cffbd;
+      height: 118px;
+      overflow: hidden;
+    }
+
+    .terminal-line {
+      animation: blinkLine 1.5s infinite;
+      margin-bottom: 6px;
+    }
+
+    @keyframes blinkLine {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .bottom-actions {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 12;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 90%;
+    }
+
+    .action-btn {
+      background: rgba(0,255,140,0.08);
+      color: #d9ffe8;
+      border: 1px solid rgba(0,255,140,0.35);
+      padding: 12px 16px;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: 2px;
+      transition: 0.25s;
+    }
+
+    .action-btn:hover {
+      background: rgba(0,255,140,0.2);
+      box-shadow: 0 0 20px rgba(0,255,140,0.3);
+      transform: translateY(-4px);
+    }
+
+    .message-box {
+      position: absolute;
+      bottom: 95px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      padding: 14px 20px;
+      max-width: 430px;
+      background: rgba(0,0,0,0.82);
+      border: 1px solid rgba(0,255,140,0.5);
+      color: #d9ffe8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s;
+    }
+
+    .message-box.show {
+      opacity: 1;
+    }
+
+    .scan-circle {
+      width: 170px;
+      height: 170px;
+      border: 1px solid rgba(0,255,140,0.35);
+      border-radius: 50%;
+      margin: 10px auto 18px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,255,140,0.12);
+    }
+
+    .scan-circle::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px dashed rgba(0,255,140,0.35);
+      border-radius: 50%;
+    }
+
+    .scan-circle::after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 2px;
+      top: 50%;
+      left: 50%;
+      background: #00ff8c;
+      transform-origin: left;
+      animation: radar 2.8s linear infinite;
+      box-shadow: 0 0 20px #00ff8c;
+    }
+
+    @keyframes radar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 900px) {
+      .hud {
+        grid-template-columns: 1fr;
+        padding: 16px;
       }
 
-      #countdownOverlay h2 {
-        font-size: 2.2rem;
+      .left-panel,
+      .right-panel {
+        display: none;
       }
 
-      .time-box {
-        min-width: 90px;
-        padding: 15px;
+      #timer {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bottom-actions {
+        bottom: 15px;
+      }
+
+      .album-title {
+        font-size: 3rem;
       }
     }
-    .album-title {
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  text-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
-}
-
-.release-date {
-  color: #ff4444;
-  letter-spacing: 3px;
-  margin-bottom: 35px;
-  text-transform: uppercase;
-}
-
-.tracklist {
-  margin-top: 70px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.tracklist h2 {
-  margin-bottom: 20px;
-  letter-spacing: 4px;
-  color: #ff4444;
-}
-
-.track {
-  padding: 12px;
-  margin: 8px 0;
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.track:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-.album-cover {
-  width: 400px;
-  max-width: 90%;
-  border-radius: 20px;
-  box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
-  margin-bottom: 30px;
-}
-
-@media (max-width: 768px) {
-  .album-title {
-    font-size: 3rem;
-  }
-}
   </style>
 </head>
 
 <body>
 
   <div id="countdownOverlay">
-    <h2>06 • 12 • 26</h2>
-    <p>Something powerful is coming.</p>
-
-    <div id="timer">
-      <div class="time-box">
-        <span id="days">00</span>
-        <small>Days</small>
-      </div>
-      <div class="time-box">
-        <span id="hours">00</span>
-        <small>Hours</small>
-      </div>
-      <div class="time-box">
-        <span id="minutes">00</span>
-        <small>Minutes</small>
-      </div>
-      <div class="time-box">
-        <span id="seconds">00</span>
-        <small>Seconds</small>
-      </div>
+    <div class="matrix">
+010101  ACCESS NODE  7719  SECURE FILE  ██ ██ ██
+110010  TRACE ACTIVE  06.12.26  CLASSIFIED
+001101  POWER SIGNAL  LOCKED  LOCKED  LOCKED
+101010  FILE STATUS  REDACTED  REDACTED
+011001  AUDIO PACKAGE  ENCRYPTED  WAITING
+010101  ACCESS NODE  7719  SECURE FILE  ██ ██ ██
+110010  TRACE ACTIVE  06.12.26  CLASSIFIED
+001101  POWER SIGNAL  LOCKED  LOCKED  LOCKED
+101010  FILE STATUS  REDACTED  REDACTED
+011001  AUDIO PACKAGE  ENCRYPTED  WAITING
     </div>
 
-    <div class="locked">CLASSIFIED UNTIL RELEASE</div>
+    <div class="hud">
+
+      <aside class="panel left-panel">
+        <h3>CASE FILE</h3>
+        <div class="small-line">OPERATION: <span class="redacted"></span></div>
+        <div class="small-line">ARTIST: <span class="redacted"></span></div>
+        <div class="small-line">ALBUM: <span class="redacted"></span></div>
+        <div class="small-line">STATUS: <span class="status">LOCKED</span></div>
+        <div class="small-line">CLEARANCE: LEVEL 06</div>
+
+        <br>
+
+        <h3>LIVE FEED</h3>
+        <div class="small-line">CAM 01: ONLINE</div>
+        <div class="small-line">CAM 02: SIGNAL LOST</div>
+        <div class="small-line">CAM 03: ACTIVE</div>
+        <div class="small-line">VAULT: SEALED</div>
+      </aside>
+
+      <main class="center-console">
+        <div class="classified-stamp">CONFIDENTIAL</div>
+        <div class="top-label">Secure Transmission Pending</div>
+
+        <h2>06 • 12 • 26</h2>
+
+        <p>Encrypted release file unlocks soon.</p>
+
+        <div id="timer">
+          <div class="time-box"><span id="days">00</span><small>Days</small></div>
+          <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+          <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+          <div class="time-box"><span id="seconds">00</span><small>Seconds</small></div>
+        </div>
+
+        <div class="locked">Unauthorized Preview Blocked</div>
+
+        <div class="terminal">
+          <div class="terminal-line">&gt; opening secure channel...</div>
+          <div class="terminal-line">&gt; cover image: hidden</div>
+          <div class="terminal-line">&gt; tracklist: redacted</div>
+          <div class="terminal-line">&gt; release package: encrypted</div>
+          <div class="terminal-line">&gt; waiting for 06.12.26...</div>
+        </div>
+      </main>
+
+      <aside class="panel right-panel">
+        <h3>SIGNAL SCAN</h3>
+        <div class="scan-circle"></div>
+
+        <div class="small-line">FREQUENCY: 92.6</div>
+        <div class="small-line">SOURCE: UNKNOWN</div>
+        <div class="small-line">PACKAGE: AUDIO</div>
+        <div class="small-line">SECURITY: MAX</div>
+
+        <br>
+
+        <h3>REDACTED NOTES</h3>
+        <div class="small-line">01. The first file starts here.</div>
+        <div class="small-line">02. Title unavailable.</div>
+        <div class="small-line">03. Cover unavailable.</div>
+        <div class="small-line">04. Await unlock.</div>
+      </aside>
+
+    </div>
+
+    <div id="messageBox" class="message-box">Classified.</div>
+
+    <div class="bottom-actions">
+      <button class="action-btn" onclick="showMessage('ACCESS DENIED: Album title sealed.')">OPEN FILE</button>
+      <button class="action-btn" onclick="showMessage('SCAN COMPLETE: Cover remains hidden.')">SCAN COVER</button>
+      <button class="action-btn" onclick="showMessage('TRACKLIST LOCKED UNTIL RELEASE.')">VIEW TRACKLIST</button>
+      <button class="action-btn" onclick="showMessage('SECURE CHANNEL ACTIVE. WAIT FOR 06.12.26.')">CONNECT</button>
+    </div>
   </div>
 
-  <main class="album-page">
+  <section class="album-page">
 
-    <!-- REPLACE WITH YOUR REAL ALBUM COVER URL LATER -->
     <img
-  class="album-cover"
-  id="albumCover"
-  src="https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/MMJM.png"
-  alt="Coming Soon"
-/>
+      class="album-cover"
+      id="albumCover"
+      src="https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/MMJM.png"
+      alt="Coming Soon"
+    />
 
     <h1 class="album-title">POWER FOREVER</h1>
 
-    <p class="subtitle">
-      The new album is finally Coming.
-    </p>
+    <p class="subtitle">The new album is finally Coming.</p>
 
-    <p class="release-date">
-      Release Date ?
-    </p>
+    <p class="release-date">Release Date ?</p>
 
-    <a href="#" class="listen-btn">
-      LISTEN SOON
-    </a>
+    <a href="#" class="listen-btn">LISTEN SOON</a>
 
     <div class="tracklist">
       <h2>TRACKLIST</h2>
-
       <div class="track">01 • The Story Starts Here</div>
       <div class="track">02 • ?</div>
       <div class="track">03 • ?</div>
@@ -288,32 +578,42 @@
       <div class="track">08 • ?</div>
     </div>
 
-</main>
+  </section>
 
   <script>
     const releaseDate = new Date("June 12, 2026 00:00:00").getTime();
-const REAL_COVER =
-"https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/power.png";
 
-const albumCover = document.getElementById("albumCover");
+    const REAL_COVER =
+      "https://raw.githubusercontent.com/ianthehippo/ABLUMRELEASE/refs/heads/main/power.png";
+
+    const albumCover = document.getElementById("albumCover");
     const overlay = document.getElementById("countdownOverlay");
     const albumPage = document.querySelector(".album-page");
+    const messageBox = document.getElementById("messageBox");
+
+    function showMessage(text) {
+      messageBox.textContent = text;
+      messageBox.classList.add("show");
+
+      setTimeout(() => {
+        messageBox.classList.remove("show");
+      }, 2200);
+    }
 
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = releaseDate - now;
 
       if (distance <= 0) {
+        albumCover.src = REAL_COVER;
+        albumCover.alt = "POWER FOREVER Album Cover";
 
-  albumCover.src = REAL_COVER;
-  albumCover.alt = "POWER FOREVER Album Cover";
+        overlay.style.display = "none";
+        document.body.style.overflow = "auto";
+        albumPage.classList.add("revealed");
 
-  overlay.style.display = "none";
-  document.body.style.overflow = "auto";
-  albumPage.classList.add("revealed");
-
-  return;
-}
+        return;
+      }
 
       document.body.style.overflow = "hidden";
 
